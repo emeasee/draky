@@ -13,7 +13,7 @@ ADD ./ /opt/site/
 WORKDIR /opt/site
 
 RUN npm install
-RUN bower install
+RUN bower install --allow-root
 RUN make build
 
 CMD ["http-server ./build"]

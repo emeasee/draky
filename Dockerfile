@@ -6,7 +6,7 @@ RUN sudo sudo apt-get install -y python-software-properties software-properties-
 RUN sudo add-apt-repository ppa:chris-lea/node.js
 RUN sudo apt-get update
 RUN sudo apt-get install -y git python g++ make nodejs
-RUN sudo npm install -g bower
+RUN sudo npm install -g bower gulp
 RUN sudo npm install -g http-server
 
 ADD ./ /opt/site/
@@ -16,7 +16,7 @@ RUN npm install
 RUN bower install --allow-root
 RUN make build
 
-CMD ["http-server ./build"]
+CMD ["http-server build/"]
 
-EXPOSE 80
+EXPOSE 8080
 

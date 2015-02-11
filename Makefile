@@ -1,4 +1,4 @@
-init:
+setup:
 	npm install
 	bower install
 

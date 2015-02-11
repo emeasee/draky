@@ -16,7 +16,7 @@ RUN npm install
 RUN bower install --allow-root
 RUN make build
 
-CMD ["http-server ./build"]
+CMD ["http-server build/"]
 
-EXPOSE 80
+EXPOSE 8080
 

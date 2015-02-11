@@ -9,7 +9,7 @@ RUN sudo apt-get install -y python g++ make nodejs
 RUN sudo npm install -g bower
 RUN sudo npm install -g http-server
 
-ADD build/ /opt/site/
+ADD ./ /opt/site/
 WORKDIR /opt/site
 
 RUN npm install

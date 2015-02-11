@@ -4,3 +4,6 @@ setup:
 
 run:
 	gulp browser-sync
+
+build:
+	gulp build

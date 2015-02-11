@@ -1,15 +1,22 @@
-FROM nginx
+FROM ubuntu
 MAINTAINER Mac Oosthuizen <mac@piment.digital>
 
-RUN mv /etc/nginx/nginx.conf /tmp/nginx.conf && echo "daemon off;" > /etc/nginx/nginx.conf && cat /tmp/nginx.conf >> /etc/nginx/nginx.conf && rm /tmp/nginx.conf
-RUN rm /etc/nginx/conf.d/default.conf
-ADD site.conf /etc/nginx/conf.d/default.conf
+RUN sudo apt-get update
+RUN sudo sudo apt-get install -y python-software-properties software-properties-common
+RUN sudo add-apt-repository ppa:chris-lea/node.js
+RUN sudo apt-get update
+RUN sudo apt-get install -y python g++ make nodejs
+RUN sudo npm install -g bower
+RUN sudo npm install -g http-server
 
 ADD build/ /opt/site/
-
 WORKDIR /opt/site
 
-CMD ["/usr/sbin/nginx"]
+RUN npm install
+RUN bower install
+RUN make build
+
+CMD ["http-server ./build"]
 
 EXPOSE 80
 

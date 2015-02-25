@@ -7,3 +7,7 @@ run:
 
 build:
 	gulp build
+
+deploy:
+	gulp build
+	http-server -p 80 build/

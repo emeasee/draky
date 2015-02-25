@@ -1,1 +1,1 @@
-web: make setup; make deploy --port=8080
+web: make build; http-server -p 8080 build/

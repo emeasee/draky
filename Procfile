@@ -1,1 +1,1 @@
-web: sh postinstall.sh
+web: make setup; make deploy

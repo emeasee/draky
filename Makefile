@@ -10,4 +10,4 @@ build:
 
 deploy:
 	gulp build
-	http-server -p 80 build/
+	http-server build/

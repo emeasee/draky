@@ -1,6 +1,5 @@
 setup:
 	npm install
-	npm install -g bower
 	bower install --allow-root
 
 run:

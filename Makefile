@@ -1,6 +1,6 @@
 setup:
 	npm install
-	bower install
+	bower install --allow-root
 
 run:
 	gulp browser-sync

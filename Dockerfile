@@ -12,6 +12,6 @@ RUN sudo npm install -g http-server
 ADD ./ /opt/site/
 WORKDIR /opt/site
 
-CMD ["make","run"]
+CMD make run
 
 EXPOSE 8080

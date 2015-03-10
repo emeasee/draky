@@ -6,7 +6,7 @@ RUN sudo sudo apt-get install -y python-software-properties software-properties-
 RUN sudo add-apt-repository ppa:chris-lea/node.js
 RUN sudo apt-get update
 RUN sudo apt-get install -y git python g++ make nodejs
-RUN sudo npm install -g bower gulp
+RUN sudo npm install -g gulp
 RUN sudo npm install -g http-server
 
 ADD ./ /opt/site/

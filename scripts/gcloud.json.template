@@ -1,0 +1,7 @@
+{
+  "private_key_id": "${GCLOUD_KEY_ID}",
+  "private_key": "${GCLOUD_KEY}",
+  "client_email": "${GCLOUD_EMAIL}",
+  "client_id": "${GCLOUD_ID}",
+  "type": "service_account"
+}

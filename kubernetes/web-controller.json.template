@@ -1,0 +1,23 @@
+{
+  "id": "${CTRL_ID}",
+  "kind": "ReplicationController",
+  "apiVersion":"v1beta1",
+  "desiredState": {
+    "replicas": ${CTRL_COUNT},
+    "replicaSelector": {"name": "web", "version": "${CTRL_VERSION}"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "webcontroller",
+          "containers": [{
+            "name": "draky",
+            "image": "${INTERNAL_REGISTRY_ENDPOINT}/draky:${CTRL_VERSION},
+            "ports": [{"containerPort": 8080}]
+          }]
+        }
+      },
+      "labels": {"name": "web", "version": "${CTRL_VERSION}"}
+    }},
+  "labels": {"name": "web"}
+}

@@ -16,7 +16,7 @@ dependencies:
     - ~/docker
     - ~/google-cloud-sdk
   override:
-    - scripts/ensure-kubernetes-installed.sh
+    - scripts/ensure-gcloud-installed.sh
     - sudo docker -d -D -e lxc -s btrfs --insecure-registry $EXTERNAL_REGISTRY_ENDPOINT:
         background: true
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi

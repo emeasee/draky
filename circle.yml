@@ -1,0 +1,39 @@
+# circle.yml
+machine:
+  environment:
+    CLOUDSDK_CORE_DISABLE_PROMPTS: 1
+    CLOUDSDK_PYTHON_SITEPACKAGES: 1
+    CLOUDSDK_COMPUTE_ZONE: europe-west1-d
+    CLOUDSDK_CORE_PROJECT: piment-cloud
+    CLOUDSDK_CONTAINER_CLUSTER: cluster_1
+    PATH: $PATH:/home/ubuntu/google-cloud-sdk/bin
+  python:
+    version: 2.7.3
+
+dependencies:
+  cache_directories:
+    - ~/kubernetes
+    - ~/docker
+    - ~/google-cloud-sdk
+  override:
+    - scripts/ensure-kubernetes-installed.sh
+    - sudo docker -d -D -e lxc -s btrfs --insecure-registry $EXTERNAL_REGISTRY_ENDPOINT:
+      background: true
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+    - script/git-set-mtimes.pl
+    - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1 .
+    - mkdir -p ~/docker; docker save $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1 > ~/docker/image.tar
+
+test:
+  override:
+    - docker run -d -p 8080:8080 $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1; sleep 10
+    - curl --retry 10 --retry-delay 5 -v http://localhost:8080
+
+deployment:
+  live:
+    branch: master
+    command:
+      # - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $EXTERNAL_REGISTRY_ENDPOINT
+      - docker push $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1
+      - script/auth-gcloud.sh
+      - script/rolling-update.sh

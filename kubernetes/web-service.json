@@ -1,0 +1,14 @@
+{
+  "id": "drakyservice",
+  "kind": "Service",
+  "apiVersion": "v1beta1",
+  "port": 80,
+  "containerPort": 8080,
+  "labels": {
+    "name": "web"
+  }
+  "selector": {
+    "name": "web"
+  },
+  "createExternalLoadBalancer": true
+}

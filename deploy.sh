@@ -3,7 +3,7 @@
 # Exit on any error
 set -e
 
-KUBE_CMD=gcloud preview containers kubectl
+KUBE_CMD=gcloud preview container kubectl
 
 # Update Kubernetes replicationController
 envsubst < kubernetes/web-controller.json.template > web-controller.json

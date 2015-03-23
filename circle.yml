@@ -35,4 +35,4 @@ deployment:
     commands:
       - scripts/auth-gcloud.sh
       - docker push $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1
-      - scripts/rolling-update.sh
+      - ./deploy.sh

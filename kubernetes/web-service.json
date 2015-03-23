@@ -6,7 +6,7 @@
   "containerPort": 8080,
   "labels": {
     "name": "web"
-  }
+  },
   "selector": {
     "name": "web"
   },

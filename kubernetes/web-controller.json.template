@@ -1,10 +1,10 @@
 {
-  "id": "${CTRL_ID}",
+  "id": "webcontroller",
   "kind": "ReplicationController",
-  "apiVersion":"v1beta1",
+  "apiVersion": "v1beta1",
   "desiredState": {
-    "replicas": ${CTRL_COUNT},
-    "replicaSelector": {"name": "web", "version": "${CTRL_VERSION}"},
+    "replicas": 2,
+    "replicaSelector": {"name": "web", "version": "${CIRCLE_SHA1}"},
     "podTemplate": {
       "desiredState": {
         "manifest": {
@@ -12,12 +12,12 @@
           "id": "webcontroller",
           "containers": [{
             "name": "draky",
-            "image": "${INTERNAL_REGISTRY_ENDPOINT}/draky:${CTRL_VERSION},
+            "image": "${INTERNAL_REGISTRY_ENDPOINT}/draky:${CIRCLE_SHA1}",
             "ports": [{"containerPort": 8080}]
           }]
         }
       },
-      "labels": {"name": "web", "version": "${CTRL_VERSION}"}
+      "labels": {"name": "web", "version": "${CIRCLE_SHA1}"}
     }},
   "labels": {"name": "web"}
 }

@@ -38,7 +38,7 @@ delete-controller() {
 create-controller() {
     CTRL_ID="$CTRL_BASENAME-$CTRL_VERSION" \
       envsubst < kubernetes/web-controller.json.template > web-controller.json
-    $GKE_CMD create --config-file web-controller.json > /dev/null
+    $GKE_CMD create -f web-controller.json > /dev/null
 }
 
 # Assumes CTRL_COUNT, and CTRL_VERSION

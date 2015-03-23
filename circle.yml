@@ -4,8 +4,8 @@ machine:
     CLOUDSDK_CORE_DISABLE_PROMPTS: 1
     CLOUDSDK_PYTHON_SITEPACKAGES: 1
     CLOUDSDK_COMPUTE_ZONE: europe-west1-d
-    CLOUDSDK_CORE_PROJECT: piment-cloud
-    CLOUDSDK_CONTAINER_CLUSTER: cluster_1
+    CLOUDSDK_CORE_PROJECT: pimentcloud
+    CLOUDSDK_CONTAINER_CLUSTER: static-sites
     PATH: $PATH:/home/ubuntu/google-cloud-sdk/bin
   python:
     version: 2.7.3

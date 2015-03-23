@@ -18,7 +18,7 @@ dependencies:
   override:
     - scripts/ensure-kubernetes-installed.sh
     - sudo docker -d -D -e lxc -s btrfs --insecure-registry $EXTERNAL_REGISTRY_ENDPOINT:
-      background: true
+        background: true
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - script/git-set-mtimes.pl
     - docker build -t $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1 .
@@ -30,7 +30,7 @@ test:
     - curl --retry 10 --retry-delay 5 -v http://localhost:8080
 
 deployment:
-  live:
+  prod:
     branch: master
     command:
       # - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS $EXTERNAL_REGISTRY_ENDPOINT

@@ -30,7 +30,7 @@ count-running() {
 
 # Assumes CTRL_VERSION
 delete-controller() {
-    $GKE_CMD delete $CTRL_BASENAME-$CTRL_VERSION > /dev/null
+    $GKE_CMD stop rc  $CTRL_BASENAME-$CTRL_VERSION > /dev/null
 }
 
 # Assumes CTRL_COUNT and CTRL_VERSION

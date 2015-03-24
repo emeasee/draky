@@ -3,7 +3,7 @@
 set -eu
 
 CTRL_BASENAME=webcontroller
-TARGET_COUNT=2
+TARGET_COUNT=1
 GKE_CMD="gcloud preview container kubectl"
 
 # Some minimal protection against racy deploys

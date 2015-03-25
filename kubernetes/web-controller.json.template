@@ -12,7 +12,7 @@
           "id": "webcontroller",
           "containers": [{
             "name": "draky",
-            "image": "${INTERNAL_REGISTRY_ENDPOINT}/draky:${CTRL_VERSION}",
+            "image": "${EXTERNAL_REGISTRY_ENDPOINT}/draky:${CTRL_VERSION}",
             "ports": [{"containerPort": 8080}]
           }]
         }

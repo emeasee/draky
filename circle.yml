@@ -41,4 +41,5 @@ deployment:
     commands:
       - scripts/auth-gcloud.sh
       - docker push $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1
+      - envsubst < .kubernetes_auth.template > ~/.kubernetes_auth
       - scripts/rolling-update.sh

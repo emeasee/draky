@@ -3,16 +3,16 @@
 set -eu
 
 CTRL_BASENAME=webcontroller
-TARGET_COUNT=1
-GKE_CMD="gcloud preview container kubectl"
+TARGET_COUNT=2
+KUBE_CMD=${KUBERNETES_ROOT:-~/kubernetes}/cluster/kubectl.sh
 
 # Some minimal protection against racy deploys
-if [ $($GKE_CMD get rc | grep -c $CTRL_BASENAME) -ne 1 ]; then
+if [ $($KUBE_CMD get rc | grep -c $CTRL_BASENAME) -ne 1 ]; then
     echo "More than one replication controller deployed"
     exit 1
 fi
 
-OLD_CTRL_VERSION=$($GKE_CMD get rc | grep $CTRL_BASENAME | cut -f1 -d ' ' | sed "s/$CTRL_BASENAME-//")
+OLD_CTRL_VERSION=$($KUBE_CMD get rc | grep $CTRL_BASENAME | cut -f1 -d ' ' | sed "s/$CTRL_BASENAME-//")
 NEW_CTRL_VERSION=$CIRCLE_SHA1
 
 if [ $OLD_CTRL_VERSION == $NEW_CTRL_VERSION ]; then
@@ -25,19 +25,19 @@ echo "New version:" $NEW_CTRL_VERSION
 
 # Assumes CTRL_VERSION
 count-running() {
-    echo $($GKE_CMD get pods | grep -c "$CTRL_VERSION.*Running")
+    echo $($KUBE_CMD get pods | grep -c "$CTRL_VERSION.*Running")
 }
 
 # Assumes CTRL_VERSION
 delete-controller() {
-    $GKE_CMD stop rc  $CTRL_BASENAME-$CTRL_VERSION > /dev/null
+    $KUBE_CMD stop rc  $CTRL_BASENAME-$CTRL_VERSION > /dev/null
 }
 
 # Assumes CTRL_COUNT and CTRL_VERSION
 create-controller() {
     CTRL_ID="$CTRL_BASENAME-$CTRL_VERSION" \
       envsubst < kubernetes/web-controller.json.template > web-controller.json
-    $GKE_CMD create -f web-controller.json > /dev/null
+    $KUBE_CMD create -f web-controller.json > /dev/null
 }
 
 # Assumes CTRL_COUNT, and CTRL_VERSION

@@ -5,7 +5,6 @@ machine:
     CLOUDSDK_PYTHON_SITEPACKAGES: 1
     CLOUDSDK_COMPUTE_ZONE: europe-west1-d
     CLOUDSDK_CORE_PROJECT: pimentcloud
-    CLOUDSDK_CONTAINER_CLUSTER: static-sites
     PATH: $PATH:/home/ubuntu/google-cloud-sdk/bin
   python:
     version: 2.7.3
@@ -16,6 +15,7 @@ dependencies:
     - ~/docker
     - ~/google-cloud-sdk
   override:
+    - scripts/ensure-kubernetes-installed.sh
     - scripts/ensure-gcloud-installed.sh
     - sudo docker -d -D -e lxc -s btrfs --insecure-registry $EXTERNAL_REGISTRY_ENDPOINT:
         background: true

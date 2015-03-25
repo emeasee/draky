@@ -3,7 +3,7 @@
   "kind": "ReplicationController",
   "apiVersion": "v1beta1",
   "desiredState": {
-    "replicas": ${CTRL_COUNT},
+    "replicas": ${CTRL_COUN},
     "replicaSelector": {"name": "web", "version": "${CTRL_VERSION}"},
     "podTemplate": {
       "desiredState": {

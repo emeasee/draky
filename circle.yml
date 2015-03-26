@@ -35,12 +35,12 @@ deployment:
     commands:
       - scripts/auth-gcloud.sh
       - docker push $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1
-      - envsubst < .kubeconfig.template > ~/.kubeconfig
+      - envsubst < .kubeconfig.template > .kubeconfig
       - scripts/rolling-update.sh
   stage:
     branch: staging
     commands:
       - scripts/auth-gcloud.sh
       - docker push $EXTERNAL_REGISTRY_ENDPOINT/draky:$CIRCLE_SHA1
-      - envsubst < .kubeconfig.template > ~/.kubeconfig
+      - envsubst < .kubeconfig.template > .kubeconfig
       - scripts/rolling-update.sh
